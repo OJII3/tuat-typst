@@ -4,4 +4,4 @@ version = "0.1.0"
 entrypoint = "tuat-template.typ"
 authors = ["OJII3", "toufu24"]
 license = "MIT"
-description = "Typst Title Page Template for TUAT Student"
+description = "Typst Title Page Template for TUAT Students who major in Computer Science"
