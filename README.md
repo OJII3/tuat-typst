@@ -9,7 +9,7 @@
 ## 使い方
 
 ```typst
-#import "@local/tuat-typst: tuatTemplate"
+#import "@local/tuat-typst:0.1.0: tuatTemplate"
 
 #show: doc => tuatTemplate(// title: "実験報告書",            // タイトル(上部)
 date1: "2021-01-01", // 日付1
