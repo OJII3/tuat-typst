@@ -41,7 +41,7 @@ doc) = {
   let rows = { let n = 0; while n < 18 {
     n += 1; (36pt, )
   } }
-  let columns = (32pt, 3fr, 3fr, 1fr, 1fr, 1fr)
+  let columns = (32pt, 2fr, 3fr, 1fr, 1fr, 1fr)
   let pattern1(col1) = (table.cell(colspan: 3, [#col1]), table.cell(colspan: 3, []))
   let pattern2(col1, col2) = (table.cell(colspan: 3, [#col1]), table.cell(colspan: 3, [#col2]))
   let pattern3(col1, col2, col3) = ([#col1], [#col2], [#col3], table.cell(colspan: 3, []))

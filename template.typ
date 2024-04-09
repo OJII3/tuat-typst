@@ -1,6 +1,6 @@
 #import "@local/tuat-typst:0.1.0": tuatTemplate
 
-#show: doc => tuatTemplate(// title: "実験報告書",            // タイトル(上部)
+#show: doc => tuatTemplate(// title: "実験報告書
 date1: "2021-01-01", // 日付1
 date2: "2021-01-02", // 日付2
 date3: "2021-01-03", // 日付3
@@ -22,5 +22,5 @@ semester: "後期", // 学期
 credit: "2", // 単位
 theme: "テーマ", // テーマ
 studentId: "学籍番号", // 学籍番号
-author: "名前", // 名前
+author: "John Doe", // 著者
 doc)
