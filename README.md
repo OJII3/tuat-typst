@@ -2,6 +2,8 @@
 
 ## インストール
 
+### Linux, WSL
+
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.sh)"
 ```
