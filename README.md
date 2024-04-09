@@ -1,6 +1,12 @@
 # 知能情報システム工学実験表紙(Typst版)
 
-**現在作成中です! Issue, PR 歓迎**
+## インストール
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.sh)"
+```
+
+## 進捗
 
 - [x] 表紙の見た目再現
 - [x] 関数化
