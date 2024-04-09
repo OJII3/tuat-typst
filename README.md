@@ -36,6 +36,8 @@ studentId: "学籍番号", // 学籍番号
 author: "名前", // 名前
 doc)
 ```
+![image](https://github.com/OJII3/tuat-typst/assets/84656786/a53bd4db-fcef-4b58-ad4e-35e196f64639)
+
 
 ## 進捗
 
