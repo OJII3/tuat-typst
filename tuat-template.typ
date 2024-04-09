@@ -1,29 +1,27 @@
-#let tuatTemplate(
-  title: "実験報告書",    // タイトル(上部)
-  date1: "",              // 日付1
-  date2: "",              // 日付2
-  date3: "",              // 日付3
-  date4: "",              // 日付4
-  date5: "",              // 日付5
-  collaborator1: "",      // 共同作業者1
-  collaborator2: "",      // 共同作業者2
-  collaborator3: "",      // 共同作業者3
-  collaborator4: "",      // 共同作業者4
-  collaborator5: "",      // 共同作業者5
-  submitDate: "",         // 提出日
-  resubmitDate: "",       // 再提出日
-  deadline: "",           // 期限日
-  redeadline: "",         // 再提出期限日
-  subject: "",            // 科目名
-  teacher: "",            // テーマ指導教員
-  grade: "",              // 学年
-  semester: "",           // 学期
-  credit: "",             // 単位
-  theme: "",              // テーマ
-  studentId: "",          // 学籍番号
-  author: "",             // 名前
-  doc
-) = {
+#let tuatTemplate(title: "実験報告書", // タイトル(上部)
+date1: "", // 日付1
+date2: "", // 日付2
+date3: "", // 日付3
+date4: "", // 日付4
+date5: "", // 日付5
+collaborator1: "", // 共同作業者1
+collaborator2: "", // 共同作業者2
+collaborator3: "", // 共同作業者3
+collaborator4: "", // 共同作業者4
+collaborator5: "", // 共同作業者5
+submitDate: "", // 提出日
+resubmitDate: "", // 再提出日
+deadline: "", // 期限日
+redeadline: "", // 再提出期限日
+subject: "", // 科目名
+teacher: "", // テーマ指導教員
+grade: "", // 学年
+semester: "", // 学期
+credit: "", // 単位
+theme: "", // テーマ
+studentId: "", // 学籍番号
+author: "", // 名前
+doc) = {
 
   set text(font: "Noto Serif CJK JP")
   // 本文のフォント指定
