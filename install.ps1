@@ -24,7 +24,7 @@ Write-Host "[info] git already installed"
 
 # Create temp directory to clone the repository
 if (Test-Path $TEMP_DIR) {
-    Write-Host "$TEMP_DIR is already exist and delete this to continue"
+    Write-Host "$TEMP_DIR is already exist and delete this to continue" -ForegroundColor Yellow
     Remove-Item "$TEMP_DIR" -Force -Recurse -Confirm
 }
 if (Test-Path $TEMP_DIR) {
@@ -38,7 +38,7 @@ if ($LastExitCode -ge 1) {
     Write-Host "[Error] filed to clone" -ForegroundColor Red
     exit 1
 }
-Write-Host "clone succeeded"
+Write-Host "[info] clone succeeded"
 
 # Copy the files to the destination directory
 robocopy "$TEMP_DIR" "$FULL_PATH" /E /PURGE | Out-Null
