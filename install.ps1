@@ -8,7 +8,7 @@ if (Test-Path $env:APPDATA) {
 }
 Write-Host "[info] DATA_DIR is set to: $DATA_DIR"
 
-$NAME_SPACE="local"
+$NAMESPACE="local"
 $NAME="tuat-typst"
 $VERSION="0.1.0"
 
