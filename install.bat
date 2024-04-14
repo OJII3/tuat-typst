@@ -34,7 +34,7 @@ echo [info] copy succeeded
 
 @rem Clean up
 rmdir /s /q "%TEMP_DIR%"
-if %ERRORLEVEL% NEQ 0 (echo [info] filed to clean up, but install finished successfully )
+if %ERRORLEVEL% NEQ 0 (echo [info] filed to clean up, but install finished successfully)
 
-echo ========================================
+echo =======================================^=
 echo Installation completed successfully!
