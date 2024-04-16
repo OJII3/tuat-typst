@@ -8,6 +8,11 @@
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.sh)"
 ```
 
+### Windows
+```PowerShell
+iwr https://raw.githubusercontent.com/kitashimauni/tuat-typst/main/install.ps1 | iex
+```
+
 ## 使い方
 
 ```typst
@@ -47,7 +52,7 @@ doc)
 - [x] 関数化
 - [x] パッケージ化
 - [x] Linux & WSL 向けインストールスクリプト (Posix shell)
-- [ ] Windows 向けインストールスクリプト (PowerShell)
+- [x] Windows 向けインストールスクリプト (PowerShell)
 - [ ] スターターテンプレートの作成
 
 Inspired by [pinapplehunter/tuat-tex](https://github.com/pineapplehunter/tuat-tex)
