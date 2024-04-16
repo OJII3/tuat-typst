@@ -9,7 +9,7 @@
 ```
 
 ### Windows
-```PowerShell
+```powershell
 iwr https://raw.githubusercontent.com/kitashimauni/tuat-typst/main/install.ps1 | iex
 ```
 
