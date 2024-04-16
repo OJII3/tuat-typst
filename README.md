@@ -10,7 +10,7 @@
 
 ### Windows
 ```powershell
-iwr https://raw.githubusercontent.com/kitashimauni/tuat-typst/main/install.ps1 | iex
+iwr "https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.ps1" | iex
 ```
 
 ## 使い方
