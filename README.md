@@ -8,7 +8,7 @@
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.sh)"
 ```
 
-### Windows
+### Windows(PowerShell)
 ```powershell
 iwr "https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.ps1" | iex
 ```
