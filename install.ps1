@@ -23,13 +23,18 @@ if (-Not (gcm git -ea SilentlyContinue)) {
 Write-Host "[info] git already installed"
 
 # Create temp directory to clone the repository
-if (Test-Path $TEMP_DIR) {
+while (Test-Path $TEMP_DIR) {
     Write-Host "$TEMP_DIR is already exist and delete this to continue" -ForegroundColor Yellow
-    Remove-Item "$TEMP_DIR" -Force -Recurse -Confirm
-}
-if (Test-Path $TEMP_DIR) {
-    Write-Host "Canceled"
-    exit 1
+    $input = Read-Host "Delete '${TEMP_DIR}'?(y/n)"
+    if ($input -match "^(y|Y|Yes)$") {
+        Remove-Item "$TEMP_DIR" -Force -Recurse
+        break
+    } elseif ($input -match "^(n|N|No)$") {
+        Write-Host "Canceled"
+        exit 1
+    } else {
+        Write-Host "Invalid character"
+    }
 }
 
 # Clone
