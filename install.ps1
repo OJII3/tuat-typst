@@ -61,3 +61,4 @@ if (Test-Path $TEMP_DIR) {
 
 Write-Host "========================================"
 Write-Host "Installation completed successfully!" -ForegroundColor Green
+

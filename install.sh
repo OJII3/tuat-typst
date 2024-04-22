@@ -22,7 +22,7 @@ fi
 [ -d "$TEMP_DIR" ] &&  rm -rf "$TEMP_DIR"
 git clone --depth 1 https://github.com/ojii3/tuat-typst.git "$TEMP_DIR"
 
-# Create the destination directory
+# Create the destination directory 
 [ -d "$FULL_PATH" ] || mkdir -p "$FULL_PATH"
 
 # Copy the files to the destination directory
@@ -33,5 +33,5 @@ cp -r "$TEMP_DIR" "$FULL_PATH"
 rm -rf "$TEMP_DIR"
 
 echo "========================================"
-echo "Installation completed successfully!"
+echo "$(tput setaf 2)Installation completed successfully$(tput sgr0)"
 
