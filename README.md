@@ -16,7 +16,7 @@ iwr "https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.ps1" | iex
 ## 使い方
 
 ```typst
-#import "@local/tuat-typst:0.1.0: tuatTemplate"
+#import "@local/tuat-typst:0.1.0": *
 
 #show: doc => tuatTemplate(// title: "実験報告書",            // タイトル(上部)
 date1: "2021-01-01", // 日付1
