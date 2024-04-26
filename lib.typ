@@ -24,9 +24,6 @@
   author: "", // 名前
   doc,
 ) = {
-  set text(font: "Noto Serif CJK JP")
-  // 本文のフォント指定
-  
   let mixed(body) = {
     set text(weight: "extrabold")
     show regex("[\p{scx:Han}\p{scx:Hira}\p{scx:Kana}]"): set text(font: "Noto Sans CJK JP", weight: "bold")
@@ -36,8 +33,6 @@
   
   set page(header: mixed[])
   // 柱へ応用
-  
-  set text(font: "Noto Serif CJK JP", size: 12pt)
   
   let rows = {
     let n = 0; while n < 18 {
