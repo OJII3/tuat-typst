@@ -24,16 +24,6 @@
   author: "", // 名前
   doc,
 ) = {
-  let mixed(body) = {
-    set text(weight: "extrabold")
-    show regex("[\p{scx:Han}\p{scx:Hira}\p{scx:Kana}]"): set text(font: "Noto Sans CJK JP", weight: "bold")
-    body
-  }
-  // 和欧混植のフォント別々指定
-  
-  set page(header: mixed[])
-  // 柱へ応用
-  
   let rows = {
     let n = 0; while n < 18 {
       n += 1; (36pt,)
