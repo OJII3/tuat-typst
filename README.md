@@ -1,8 +1,10 @@
 # 知能情報システム工学実験表紙(Typst版)
 
+![image](https://github.com/OJII3/tuat-typst/assets/84656786/a53bd4db-fcef-4b58-ad4e-35e196f64639)
+
 ## インストール
 
-`git`が必要です.
+`git`が必要です.以下のコマンドをコピーして実行してください.
 
 ### Linux, WSL
 
@@ -45,7 +47,6 @@ studentId: "学籍番号", // 学籍番号
 author: "名前", // 名前
 doc)
 ```
-![image](https://github.com/OJII3/tuat-typst/assets/84656786/a53bd4db-fcef-4b58-ad4e-35e196f64639)
 
 
 ## 進捗
@@ -55,6 +56,7 @@ doc)
 - [x] パッケージ化
 - [x] Linux & WSL 向けインストールスクリプト (Posix shell)
 - [x] Windows 向けインストールスクリプト (PowerShell)
+- [ ] Mac OS 向けインストールスクリプト (Posix shell)
 - [ ] スターターテンプレートの作成
 
 Inspired by [pinapplehunter/tuat-tex](https://github.com/pineapplehunter/tuat-tex)
