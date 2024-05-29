@@ -2,6 +2,6 @@
 name = "tuat-typst"
 version = "0.1.0"
 entrypoint = "lib.typ"
-authors = ["OJII3", "toufu24"]
+authors = ["OJII3", "toufu24", "kitashimauni"]
 license = "MIT"
-description = "Typst Title Page Template for TUAT Students who major in Computer Science"
+description = "Typst Title Page Template for TUAT AS class report"

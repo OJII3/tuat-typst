@@ -4,7 +4,7 @@
 
 ## インストール
 
-`git`が必要です.以下のコマンドをコピーして実行してください.
+以下のコマンドをコピーして実行してください.
 
 ### Linux, WSL
 
@@ -16,6 +16,8 @@
 ```powershell
 iwr "https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.ps1" | iex
 ```
+
+`git` がインストールされている必要があります.
 
 ## 使い方
 
