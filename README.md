@@ -64,7 +64,7 @@ doc)
 - [x] パッケージ化
 - [x] Linux & WSL 向けインストールスクリプト (Posix shell)
 - [x] Windows 向けインストールスクリプト (PowerShell)
-- [ ] Mac OS 向けインストールスクリプト (Posix shell)
+- [x] Mac OS 向けインストールスクリプト (Posix shell)
 - [ ] スターターテンプレートの作成
 
 Inspired by [pinapplehunter/tuat-tex](https://github.com/pineapplehunter/tuat-tex)
