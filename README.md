@@ -9,7 +9,7 @@
 ### Linux, WSL
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/linux_install.sh)"
 ```
 
 ### Windows(PowerShell)
@@ -20,7 +20,7 @@ iwr "https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.ps1" | iex
 ### MacOS
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/mac_install.sh)"
 ```
 
 `git` がインストールされている必要があります.
