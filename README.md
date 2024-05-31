@@ -17,6 +17,12 @@
 iwr "https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.ps1" | iex
 ```
 
+### MacOS
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.sh)"
+```
+
 `git` がインストールされている必要があります.
 
 ## 使い方
