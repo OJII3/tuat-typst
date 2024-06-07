@@ -61,7 +61,7 @@
 
   let table_header = table.header(..pattern2([*実験演習記録*], [*判定・指示*]))
 
-  align((center + horizon), [= #title])
+  align((center + horizon), heading(numbering: none, title))
   align(
     horizon,
     table(
