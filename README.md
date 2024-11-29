@@ -1,11 +1,11 @@
 # 知能情報システム工学実験表紙(Typst版)
 
-![image](https://github.com/OJII3/tuat-typst/assets/84656786/a53bd4db-fcef-4b58-ad4e-35e196f64639)
+![image](./preview.png)
 
 ## 使い方
 
 ```typst
-#import "@preview/tuat-typst:0.1.0": *
+#import "@local/tuat-typst:0.1.0": *
 
 #show: doc => tuatTemplate(// title: "実験報告書",            // タイトル(上部)
 date1: "2021-01-01", // 日付1
@@ -33,6 +33,8 @@ author: "名前", // 名前
 doc)
 ```
 
+フォントファミリーやフォントサイズ次第では1ページに収まらなくなることがあるので注意してください.
+
 ## ローカルへのインストール
 
 以下のコマンドをコピーして実行してください.
@@ -40,22 +42,21 @@ doc)
 ### Linux, WSL
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/linux_install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/scripts/linux_install.sh)"
 ```
 
 ### Windows(PowerShell)
 ```powershell
-iwr "https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.ps1" | iex
+iwr "https://raw.githubusercontent.com/OJII3/tuat-typst/main/scripts/install.ps1" | iex
 ```
 
 ### MacOS
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/mac_install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/scripts/mac_install.sh)"
 ```
 
 `git` がインストールされている必要があります.
-
 
 ## 進捗
 
