@@ -2,33 +2,10 @@
 
 ![image](https://github.com/OJII3/tuat-typst/assets/84656786/a53bd4db-fcef-4b58-ad4e-35e196f64639)
 
-## インストール
-
-以下のコマンドをコピーして実行してください.
-
-### Linux, WSL
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/linux_install.sh)"
-```
-
-### Windows(PowerShell)
-```powershell
-iwr "https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.ps1" | iex
-```
-
-### MacOS
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/mac_install.sh)"
-```
-
-`git` がインストールされている必要があります.
-
 ## 使い方
 
 ```typst
-#import "@local/tuat-typst:0.1.0": *
+#import "@preview/tuat-typst:0.1.0": *
 
 #show: doc => tuatTemplate(// title: "実験報告書",            // タイトル(上部)
 date1: "2021-01-01", // 日付1
@@ -55,6 +32,29 @@ studentId: "学籍番号", // 学籍番号
 author: "名前", // 名前
 doc)
 ```
+
+## ローカルへのインストール
+
+以下のコマンドをコピーして実行してください.
+
+### Linux, WSL
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/linux_install.sh)"
+```
+
+### Windows(PowerShell)
+```powershell
+iwr "https://raw.githubusercontent.com/OJII3/tuat-typst/main/install.ps1" | iex
+```
+
+### MacOS
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/mac_install.sh)"
+```
+
+`git` がインストールされている必要があります.
 
 
 ## 進捗

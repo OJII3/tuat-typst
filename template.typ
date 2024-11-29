@@ -1,4 +1,4 @@
-#import "@local/tuat-typst:0.1.0": tuatTemplate
+#import "lib.typ": tuatTemplate
 
 #show: doc => tuatTemplate( // title: "実験報告書
   date1: "2021-01-01", // 日付1
