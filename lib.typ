@@ -44,7 +44,7 @@
   grid(
     table(
       rows: rows,
-      columns: (32pt, 3fr, 3fr, 3fr),
+      columns: (0.7fr, 3fr, 3fr, 3fr),
       align: (center + horizon),
       stroke: (x: 1pt, y: 1pt),
       ..(
@@ -88,7 +88,7 @@
     ),
     table(
       rows: rows,
-      columns: (4fr, 3fr, 1fr, 1fr, 1fr),
+      columns: (3.7fr, 3fr, 1fr, 1fr, 1fr),
       align: (center + horizon),
       stroke: (x: 1pt, y: 1pt),
       [*科目名*], [*テーマ指導教員*], [*学年*], [*学期*], [*単位*],
@@ -97,7 +97,7 @@
     table(
       rows: rows,
       stroke: (x: 1pt, y: 1pt),
-      columns: (2.2fr, 1fr, 1.2fr),
+      columns: (3.7fr, 3fr, 3fr),
       align: (horizon + center),
       [*テーマ番号・テーマ名*], [*学籍番号*], [*名前*],
       theme, studentId, author,
