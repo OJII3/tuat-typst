@@ -1,11 +1,11 @@
-#import "@local/tuat-typst:0.2.0": tuatTemplate
+#import "@local/tuat-typst:0.2.0": tuat-title
 
-#show: tuatTemplate.with(
+#show: tuat-title.with(
   records: (
     (date: "2026-10-01", collaborators: "山田 太郎、佐藤 花子"),
     (date: "2026-10-08", collaborators: "山田 太郎"),
   ),
-  submitDate: "2026-10-15",
+  submit-date: "2026-10-15",
   deadline: "2026-10-22",
   subject: "情報工学実験",
   teacher: "担当教員",
@@ -13,7 +13,7 @@
   semester: "後期",
   credit: "2",
   theme: "テーマ名",
-  studentId: "12345678",
+  student-id: "12345678",
   author: "山田 太郎",
 )
 
