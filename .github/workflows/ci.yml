@@ -34,6 +34,7 @@ jobs:
           package="$RUNNER_TEMP/packages/local/tuat-typst/$(sed -n 's/^version = \"\(.*\)\"/\1/p' typst.toml)"
           mkdir -p "$package"
           cp -R . "$package/"
+          export TYPST_PACKAGE_PATH="$RUNNER_TEMP/packages"
           echo "TYPST_PACKAGE_PATH=$RUNNER_TEMP/packages" >> "$GITHUB_ENV"
           typst init "@local/tuat-typst:$(sed -n 's/^version = \"\(.*\)\"/\1/p' typst.toml)" "$RUNNER_TEMP/report"
           typst compile "$RUNNER_TEMP/report/main.typ" "$RUNNER_TEMP/report.pdf"
