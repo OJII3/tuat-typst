@@ -1,0 +1,87 @@
+# This workflow is managed by gh actions-lock.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  compile-template:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: typst-community/setup-typst@v5.3.0
+        with:
+          typst-version: 0.15.1
+      - name: Check release tag
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: bash
+        run: test "${GITHUB_REF_NAME}" = "v$(sed -n 's/^version = \"\(.*\)\"/\1/p' typst.toml)"
+      - name: Check installer shell syntax
+        if: runner.os == 'Linux'
+        run: shellcheck scripts/install.sh
+      - name: Install local package and create starter project
+        run: |
+          package="$RUNNER_TEMP/packages/local/tuat-typst/$(sed -n 's/^version = \"\(.*\)\"/\1/p' typst.toml)"
+          mkdir -p "$package"
+          cp -R . "$package/"
+          export TYPST_PACKAGE_PATH="$RUNNER_TEMP/packages"
+          echo "TYPST_PACKAGE_PATH=$RUNNER_TEMP/packages" >> "$GITHUB_ENV"
+          typst init "@local/tuat-typst:$(sed -n 's/^version = \"\(.*\)\"/\1/p' typst.toml)" "$RUNNER_TEMP/report"
+          typst compile "$RUNNER_TEMP/report/main.typ" "$RUNNER_TEMP/report.pdf"
+
+  windows-template:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: typst-community/setup-typst@v5.3.0
+        with:
+          typst-version: 0.15.1
+      - name: Check installer syntax and compile starter project
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile("$PWD/scripts/install.ps1", [ref]$tokens, [ref]$errors) | Out-Null
+          if ($errors) { throw ($errors | Out-String) }
+          $version = (Select-String -Path typst.toml -Pattern '^version = "(.*)"$').Matches[0].Groups[1].Value
+          $packageRoot = Join-Path $env:RUNNER_TEMP "packages"
+          $package = Join-Path $packageRoot "local/tuat-typst/$version"
+          New-Item -ItemType Directory -Path $package -Force | Out-Null
+          Copy-Item -Path @("typst.toml", "lib.typ", "LICENSE", "template") -Destination $package -Recurse
+          $env:TYPST_PACKAGE_PATH = $packageRoot
+          "TYPST_PACKAGE_PATH=$packageRoot" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          typst init "@local/tuat-typst:$version" (Join-Path $env:RUNNER_TEMP "report")
+          typst compile (Join-Path $env:RUNNER_TEMP "report/main.typ") (Join-Path $env:RUNNER_TEMP "report.pdf")
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: [compile-template, windows-template]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Build release package
+        id: package
+        run: |
+          version="$(sed -n 's/^version = \"\(.*\)\"/\1/p' typst.toml)"
+          test "$GITHUB_REF_NAME" = "v$version"
+          asset="tuat-typst-v$version.zip"
+          mkdir -p dist
+          zip -q -r "dist/$asset" typst.toml lib.typ LICENSE template
+          (cd dist && sha256sum "$asset" > SHA256SUMS)
+          echo "asset=$asset" >> "$GITHUB_OUTPUT"
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" "dist/${{ steps.package.outputs.asset }}" dist/SHA256SUMS --title "$GITHUB_REF_NAME" --generate-notes
