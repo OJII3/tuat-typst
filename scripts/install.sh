@@ -16,6 +16,7 @@ esac
 
 PACKAGE_DIR="$DATA_DIR/typst/packages/$NAMESPACE/$NAME"
 TARGET="$PACKAGE_DIR/$VERSION"
+ASSET="$NAME-v$VERSION.zip"
 TEMP_DIR="$(mktemp -d "${TMPDIR:-/tmp}/$NAME.XXXXXX")"
 STAGING=""
 BACKUP=""
@@ -34,11 +35,28 @@ trap 'exit 1' HUP INT TERM
 
 mkdir -p "$PACKAGE_DIR"
 STAGING="$(mktemp -d "$PACKAGE_DIR/.$VERSION.staging.XXXXXX")"
-ARCHIVE="$TEMP_DIR/package.tar.gz"
+ARCHIVE="$TEMP_DIR/$ASSET"
+CHECKSUMS="$TEMP_DIR/SHA256SUMS"
+RELEASE_URL="https://github.com/OJII3/tuat-typst/releases/download/v$VERSION"
 curl --fail --location --silent --show-error \
-  "https://github.com/OJII3/tuat-typst/archive/refs/tags/v$VERSION.tar.gz" \
+  "$RELEASE_URL/$ASSET" \
   --output "$ARCHIVE"
-tar -xzf "$ARCHIVE" --strip-components=1 -C "$STAGING"
+curl --fail --location --silent --show-error \
+  "$RELEASE_URL/SHA256SUMS" \
+  --output "$CHECKSUMS"
+
+if command -v sha256sum >/dev/null 2>&1; then
+  ACTUAL="$(sha256sum "$ARCHIVE" | awk '{print $1}')"
+else
+  ACTUAL="$(shasum -a 256 "$ARCHIVE" | awk '{print $1}')"
+fi
+EXPECTED="$(awk -v asset="$ASSET" '$2 == asset {print $1}' "$CHECKSUMS")"
+if [ -z "$EXPECTED" ] || [ "$ACTUAL" != "$EXPECTED" ]; then
+  echo "Downloaded package checksum does not match" >&2
+  exit 1
+fi
+
+unzip -q "$ARCHIVE" -d "$STAGING"
 
 if [ ! -f "$STAGING/typst.toml" ] || ! grep -Fq "version = \"$VERSION\"" "$STAGING/typst.toml"; then
   echo "Downloaded package is missing or has a mismatched typst.toml" >&2

@@ -57,4 +57,4 @@ typst init @local/tuat-typst:0.2.0 my-report
 
 ## バージョン
 
-インストーラーはリリースタグ `v0.2.0` のソースをダウンロードし、Typstのローカルパッケージとして配置します。Linuxは `$XDG_DATA_HOME` (未設定時は `~/.local/share`)、macOSは `~/Library/Application Support`、Windowsは `%APPDATA%` を使います。
+リリースタグ `v0.2.0` を push すると、Actionsが必要なファイルだけをZIPにまとめ、SHA-256チェックサムとともにGitHub Releaseへ公開します。インストーラーはそのZIPを検証して、Typstのローカルパッケージとして配置します。Linuxは `$XDG_DATA_HOME` (未設定時は `~/.local/share`)、macOSは `~/Library/Application Support`、Windowsは `%APPDATA%` を使います。
