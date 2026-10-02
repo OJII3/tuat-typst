@@ -53,8 +53,4 @@ typst init @local/tuat-typst:0.2.0 my-report
 ここから本文を書きます。
 ```
 
-`0.1.0` から更新する場合、`date1` / `collaborator1` などの引数は `records` にまとめてください。タイトルは `title`、再提出日は `resubmitDate`、再提出期限は `redeadline` で指定できます。本文が長い場合や、フォントによっては表紙が1ページに収まらないことがあります。
-
-## バージョン
-
-リリースタグ `v0.2.0` を push すると、Actionsが必要なファイルだけをZIPにまとめ、SHA-256チェックサムとともにGitHub Releaseへ公開します。インストーラーはそのZIPを検証して、Typstのローカルパッケージとして配置します。Linuxは `$XDG_DATA_HOME` (未設定時は `~/.local/share`)、macOSは `~/Library/Application Support`、Windowsは `%APPDATA%` を使います。
+タイトルは `title`、再提出日は `resubmitDate`、再提出期限は `redeadline` で指定できます。本文が長い場合や、フォントによっては表紙が1ページに収まらないことがあります。
