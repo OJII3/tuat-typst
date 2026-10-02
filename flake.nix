@@ -19,15 +19,19 @@
         system:
         let
           pkgs = import nixpkgs { inherit system; };
+          typstFonts = [ pkgs.times-newer-roman ];
+          haranoaji = pkgs.texlivePackages.haranoaji;
+          haranoajiFontPath = "${haranoaji}/fonts/opentype/public/haranoaji";
         in
         {
           default = pkgs.mkShell {
-            packages = with pkgs; [
-              typst
-              noto-fonts-cjk-sans
+            packages = [
+              pkgs.typst
+              haranoajiFontPath
+              pkgs.times-newer-roman
             ];
             shellHook = ''
-              export TYPST_FONT_PATHS="${pkgs.noto-fonts-cjk-sans}/share/fonts"
+              export TYPST_FONT_PATHS="${pkgs.lib.makeSearchPath "share/fonts" typstFonts}:${haranoajiFontPath}"
             '';
           };
         }
