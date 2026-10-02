@@ -4,7 +4,7 @@
 
 #show: tuat-title.with(
   records: (
-    (date: "2026-10-01", collaborators: "山田 太郎、佐藤 花子"),
+    (date: "2026-10-01", collaborators: "山田 太郎, 佐藤 花子"),
     (date: "2026-10-08", collaborators: "山田 太郎"),
   ),
   submit-date: "2026-10-15",
