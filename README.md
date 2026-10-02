@@ -1,6 +1,6 @@
 # 知能情報システム工学実験表紙 (Typst)
 
-![表紙のプレビュー](./preview.png)
+![表紙のプレビュー](./example/preview.png)
 
 ## インストール
 
