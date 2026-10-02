@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
 
-$Version = "0.2.0"
+$Version = "0.3.0"
 $DataDir = if ($env:APPDATA) { $env:APPDATA } else { throw "APPDATA is not set" }
 $PackageDir = Join-Path $DataDir "typst/packages/local/tuat-typst"
 $Target = Join-Path $PackageDir $Version

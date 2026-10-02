@@ -1,4 +1,4 @@
-#import "@local/tuat-typst:0.2.0": tuat-title
+#import "@local/tuat-typst:0.3.0": tuat-title
 
 #show: tuat-title.with(
   records: (

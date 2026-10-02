@@ -24,7 +24,7 @@ iwr https://raw.githubusercontent.com/OJII3/tuat-typst/main/scripts/install.ps1 
 
 ```nix
 {
-  inputs.tuat-typst.url = "github:OJII3/tuat-typst/v0.2.0";
+  inputs.tuat-typst.url = "github:OJII3/tuat-typst/v0.3.0";
 
   outputs = { nixpkgs, tuat-typst, ... }:
     let
@@ -43,7 +43,7 @@ iwr https://raw.githubusercontent.com/OJII3/tuat-typst/main/scripts/install.ps1 
 インストール後は、以下のコマンドで Typst プロジェクトを作成し、表紙のテンプレートを展開できます。
 
 ```sh
-typst init @local/tuat-typst:0.2.0 my-report
+typst init @local/tuat-typst:0.3.0 my-report
 ```
 
 ## 関数の引数
@@ -51,7 +51,7 @@ typst init @local/tuat-typst:0.2.0 my-report
 日付と共同作業者は `records` に実験記録ごとに指定します。最大5件まで指定でき、残りの枠は空欄になります。
 
 ```typst
-#import "@local/tuat-typst:0.2.0": tuat-title
+#import "@local/tuat-typst:0.3.0": tuat-title
 
 #show: tuat-title.with(
   records: (

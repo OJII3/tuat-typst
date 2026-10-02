@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-VERSION="0.2.0"
+VERSION="0.3.0"
 NAME="tuat-typst"
 NAMESPACE="local"
 
