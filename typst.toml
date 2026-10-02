@@ -1,6 +1,6 @@
 [package]
 name = "tuat-typst"
-version = "0.2.0"
+version = "0.3.0"
 entrypoint = "lib.typ"
 authors = ["OJII3", "toufu24", "kitashimauni"]
 license = "MIT"

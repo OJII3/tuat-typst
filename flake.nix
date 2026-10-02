@@ -22,11 +22,11 @@
         {
           default = pkgs.stdenvNoCC.mkDerivation {
             pname = "tuat-typst";
-            version = "0.2.0";
+            version = "0.3.0";
             src = ./.;
             installPhase = ''
               runHook preInstall
-              package_dir="$out/share/typst/packages/local/tuat-typst/0.2.0"
+              package_dir="$out/share/typst/packages/local/tuat-typst/0.3.0"
               mkdir -p "$package_dir"
               cp typst.toml lib.typ "$package_dir/"
               cp -r template "$package_dir/"
