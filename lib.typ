@@ -1,17 +1,17 @@
-#let tuatTemplate(
+#let tuat-title(
   title: "実験報告書", // タイトル(上部)
   records: (),
-  submitDate: "", // 提出日
-  resubmitDate: "", // 再提出日
+  submit-date: "", // 提出日
+  resubmit-date: "", // 再提出日
   deadline: "", // 期限日
-  redeadline: "", // 再提出期限日
+  re-deadline: "", // 再提出期限日
   subject: "", // 科目名
   teacher: "", // テーマ指導教員
   grade: "", // 学年
   semester: "", // 学期
   credit: "", // 単位
   theme: "", // テーマ
-  studentId: "", // 学籍番号
+  student-id: "", // 学籍番号
   author: "", // 名前
   doc,
 ) = {
@@ -88,8 +88,8 @@
       },
       ..pattern1([*レポート提出記録*]),
       ..pattern3([], [提出年月日], [期限年月日]),
-      ..pattern3([初], submitDate, deadline),
-      ..pattern3([再], resubmitDate, redeadline),
+      ..pattern3([初], submit-date, deadline),
+      ..pattern3([再], resubmit-date, re-deadline),
       ..pattern3([], [], []),
       ..pattern3([], [], []),
       ..pattern3([], [], []),
@@ -108,7 +108,7 @@
       columns: (3.7fr, 3fr, 3fr),
       align: (horizon + center),
       [*テーマ番号・テーマ名*], [*学籍番号*], [*名前*],
-      theme, studentId, author,
+      theme, student-id, author,
     ),
   )
 

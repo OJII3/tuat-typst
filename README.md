@@ -51,14 +51,14 @@ typst init @local/tuat-typst:0.2.0 my-report
 日付と共同作業者は `records` に実験記録ごとに指定します。最大5件まで指定でき、残りの枠は空欄になります。
 
 ```typst
-#import "@local/tuat-typst:0.2.0": tuatTemplate
+#import "@local/tuat-typst:0.2.0": tuat-title
 
-#show: tuatTemplate.with(
+#show: tuat-title.with(
   records: (
     (date: "2026-10-01", collaborators: "山田 太郎、佐藤 花子"),
     (date: "2026-10-08", collaborators: "山田 太郎"),
   ),
-  submitDate: "2026-10-15",
+  submit-date: "2026-10-15",
   deadline: "2026-10-22",
   subject: "情報工学実験",
   teacher: "担当教員",
@@ -66,7 +66,7 @@ typst init @local/tuat-typst:0.2.0 my-report
   semester: "後期",
   credit: "2",
   theme: "テーマ名",
-  studentId: "12345678",
+  student-id: "12345678",
   author: "山田 太郎",
 )
 
@@ -75,6 +75,6 @@ typst init @local/tuat-typst:0.2.0 my-report
 ここから本文を書きます。
 ```
 
-タイトルは `title`、再提出日は `resubmitDate`、再提出期限は `redeadline` で指定できます。各項目の記述が長い場合や、フォント設定によっては表紙が1ページに収まらないことがあります。
+タイトルは `title`、再提出日は `resubmit-date`、再提出期限は `re-deadline` で指定できます。各項目の記述が長い場合や、フォント設定によっては表紙が1ページに収まらないことがあります。
 
 Inspired by [pineapplehunter/tuat-tex](https://github.com/pineapplehunter/tuat-tex)
