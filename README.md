@@ -1,72 +1,60 @@
-# 知能情報システム工学実験表紙(Typst版)
+# 知能情報システム工学実験表紙 (Typst)
 
-![image](./preview.png)
+![表紙のプレビュー](./preview.png)
 
-## 使い方
+## インストール
+
+Typstをインストールしたうえで、該当するコマンドを実行してください。Gitは不要です。
+
+### Linux、macOS、WSL
+
+```sh
+script=$(mktemp) && curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/scripts/install.sh -o "$script" && /bin/sh "$script"; status=$?; rm -f "$script"; exit "$status"
+```
+
+### Windows (PowerShell)
+
+```powershell
+iwr https://raw.githubusercontent.com/OJII3/tuat-typst/main/scripts/install.ps1 | iex
+```
+
+インストール後は、Typstプロジェクトを作成して表紙のひな形を展開できます。
+
+```sh
+typst init @local/tuat-typst:0.2.0 my-report
+```
+
+## 関数の引数
+
+日付と共同作業者は `records` に記録ごとに指定します。最大5件で、残りの枠は空欄になります。
 
 ```typst
-#import "@local/tuat-typst:0.1.0": *
+#import "@local/tuat-typst:0.2.0": tuatTemplate
 
-#show: doc => tuatTemplate(// title: "実験報告書",            // タイトル(上部)
-date1: "2021-01-01", // 日付1
-date2: "2021-01-02", // 日付2
-date3: "2021-01-03", // 日付3
-date4: "2021-01-04", // 日付4
-// date5: "2021-01-05",            // 日付5
-collaborator1: "John Doe", // 共同作業者1
-collaborator2: "Jane Doe", // 共同作業者2
-collaborator3: "John Smith", // 共同作業者3
-collaborator4: "Jane Smith", // 共同作業者4
-// collaborator5: "John Johnson",  // 共同作業者5
-submitDate: "2021-01-06", // 提出日
-resubmitDate: "2021-01-08", // 再提出日
-deadline: "2021-01-07", // 期限日
-redeadline: "2021-01-09", // 再提出期限日
-subject: "情報工学実験", // 科目
-teacher: "John Doe", // テーマ指導教員
-grade: "2", // 学年
-semester: "後期", // 学期
-credit: "2", // 単位
-theme: "テーマ", // テーマ
-studentId: "学籍番号", // 学籍番号
-author: "名前", // 名前
-doc)
+#show: tuatTemplate.with(
+  records: (
+    (date: "2026-10-01", collaborators: "山田 太郎、佐藤 花子"),
+    (date: "2026-10-08", collaborators: "山田 太郎"),
+  ),
+  submitDate: "2026-10-15",
+  deadline: "2026-10-22",
+  subject: "情報工学実験",
+  teacher: "担当教員",
+  grade: "2",
+  semester: "後期",
+  credit: "2",
+  theme: "テーマ名",
+  studentId: "12345678",
+  author: "山田 太郎",
+)
+
+= レポート本文
+
+ここから本文を書きます。
 ```
 
-フォントファミリーやフォントサイズ次第では1ページに収まらなくなることがあるので注意してください.
+`0.1.0` から更新する場合、`date1` / `collaborator1` などの引数は `records` にまとめてください。タイトルは `title`、再提出日は `resubmitDate`、再提出期限は `redeadline` で指定できます。本文が長い場合や、フォントによっては表紙が1ページに収まらないことがあります。
 
-## ローカルへのインストール
+## バージョン
 
-以下のコマンドをコピーして実行してください.
-
-### Linux, WSL
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/scripts/linux_install.sh)"
-```
-
-### Windows(PowerShell)
-```powershell
-iwr "https://raw.githubusercontent.com/OJII3/tuat-typst/main/scripts/install.ps1" | iex
-```
-
-### MacOS
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typst/main/scripts/mac_install.sh)"
-```
-
-`git` がインストールされている必要があります.
-
-## 進捗
-
-- [x] 表紙の見た目再現
-- [x] 関数化
-- [x] パッケージ化
-- [x] Linux & WSL 向けインストールスクリプト (Posix shell)
-- [x] Windows 向けインストールスクリプト (PowerShell)
-- [x] Mac OS 向けインストールスクリプト (Posix shell)
-- [ ] スターターテンプレートの作成
-
-Inspired by [pinapplehunter/tuat-tex](https://github.com/pineapplehunter/tuat-tex)
-
+インストーラーはリリースタグ `v0.2.0` のソースをダウンロードし、Typstのローカルパッケージとして配置します。Linuxは `$XDG_DATA_HOME` (未設定時は `~/.local/share`)、macOSは `~/Library/Application Support`、Windowsは `%APPDATA%` を使います。

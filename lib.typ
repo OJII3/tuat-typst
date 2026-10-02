@@ -1,15 +1,6 @@
 #let tuatTemplate(
   title: "実験報告書", // タイトル(上部)
-  date1: "", // 日付1
-  date2: "", // 日付2
-  date3: "", // 日付3
-  date4: "", // 日付4
-  date5: "", // 日付5
-  collaborator1: "", // 共同作業者1
-  collaborator2: "", // 共同作業者2
-  collaborator3: "", // 共同作業者3
-  collaborator4: "", // 共同作業者4
-  collaborator5: "", // 共同作業者5
+  records: (),
   submitDate: "", // 提出日
   resubmitDate: "", // 再提出日
   deadline: "", // 期限日
@@ -24,6 +15,13 @@
   author: "", // 名前
   doc,
 ) = {
+  if type(records) != array {
+    panic("records は配列で指定してください")
+  }
+  if records.len() > 5 {
+    panic("records は5件まで指定できます")
+  }
+
   let rows = (36pt,)
   let pattern1(col1) = (
     table.cell(colspan: 3, [#col1]),
@@ -73,11 +71,21 @@
       ),
       table.header(..pattern2([*実験演習記録*], [*判定・指示*])),
       ..pattern3([], [年月日時], [共同作業者]),
-      ..pattern3(1, date1, collaborator1),
-      ..pattern3(2, date2, collaborator2),
-      ..pattern3(3, date3, collaborator3),
-      ..pattern3(4, date4, collaborator4),
-      ..pattern3([], date5, collaborator5),
+      ..for i in range(5) {
+        let record = if i < records.len() { records.at(i) } else {
+          (date: "", collaborators: "")
+        }
+        if type(record) != dictionary {
+          panic(
+            "records の各要素は date と collaborators を持つ辞書で指定してください",
+          )
+        }
+        let number = if i < 4 { str(i + 1) } else { "" }
+        pattern3(number, record.at("date", default: ""), record.at(
+          "collaborators",
+          default: "",
+        ))
+      },
       ..pattern1([*レポート提出記録*]),
       ..pattern3([], [提出年月日], [期限年月日]),
       ..pattern3([初], submitDate, deadline),
@@ -101,7 +109,7 @@
       align: (horizon + center),
       [*テーマ番号・テーマ名*], [*学籍番号*], [*名前*],
       theme, studentId, author,
-    )
+    ),
   )
 
   align((center + horizon), [東京農工大学　工学部　知能情報システム工学科])

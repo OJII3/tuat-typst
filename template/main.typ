@@ -1,0 +1,22 @@
+#import "@local/tuat-typst:0.2.0": tuatTemplate
+
+#show: tuatTemplate.with(
+  records: (
+    (date: "2026-10-01", collaborators: "山田 太郎、佐藤 花子"),
+    (date: "2026-10-08", collaborators: "山田 太郎"),
+  ),
+  submitDate: "2026-10-15",
+  deadline: "2026-10-22",
+  subject: "情報工学実験",
+  teacher: "担当教員",
+  grade: "2",
+  semester: "後期",
+  credit: "2",
+  theme: "テーマ名",
+  studentId: "12345678",
+  author: "山田 太郎",
+)
+
+= 実験内容
+
+ここにレポート本文を書きます。

@@ -1,64 +1,37 @@
-# Define the path to the directory where the script is located
+$ErrorActionPreference = "Stop"
+$ProgressPreference = "SilentlyContinue"
 
-if (Test-Path $env:APPDATA) {
-    $Data_DIR=$env:APPDATA
-} else {
-    Write-Host "[Error] env:APPDATA is not exist" -ForegroundColor Red
-    exit 1
-}
-Write-Host "[info] DATA_DIR is set to: $DATA_DIR"
+$Version = "0.2.0"
+$DataDir = if ($env:APPDATA) { $env:APPDATA } else { throw "APPDATA is not set" }
+$PackageDir = Join-Path $DataDir "typst/packages/local/tuat-typst"
+$Target = Join-Path $PackageDir $Version
+$Temp = Join-Path ([System.IO.Path]::GetTempPath()) ([System.Guid]::NewGuid().ToString())
+$Archive = Join-Path $Temp "package.zip"
+$Staging = Join-Path $PackageDir ".${Version}.staging.$([System.Guid]::NewGuid().ToString())"
+$Backup = Join-Path $PackageDir ".${Version}.backup.$([System.Guid]::NewGuid().ToString())"
 
-$NAMESPACE="local"
-$NAME="tuat-typst"
-$VERSION="0.1.0"
-
-$FULL_PATH="$DATA_DIR/typst/packages/$NAMESPACE/$NAME/$VERSION"
-$TEMP_DIR="$env:TEMP/$NAME"
-
-# Check if git is installed
-if (-Not (gcm git -ea SilentlyContinue)) {
-    Write-Host "[Error] git is not installed" -ForegroundColor Red
-    exit 1
-}
-Write-Host "[info] git already installed"
-
-# Create temp directory to clone the repository
-while (Test-Path $TEMP_DIR) {
-    Write-Host "$TEMP_DIR is already exist and delete this to continue" -ForegroundColor Yellow
-    $input = Read-Host "Delete '${TEMP_DIR}'?(y/n)"
-    if ($input -match "^(y|Y|Yes)$") {
-        Remove-Item "$TEMP_DIR" -Force -Recurse
-        break
-    } elseif ($input -match "^(n|N|No)$") {
-        Write-Host "Canceled"
-        exit 1
-    } else {
-        Write-Host "Invalid character"
+try {
+    New-Item -ItemType Directory -Path $Temp, $PackageDir -Force | Out-Null
+    $Uri = "https://github.com/OJII3/tuat-typst/archive/refs/tags/v$Version.zip"
+    Invoke-WebRequest -Uri $Uri -OutFile $Archive -UseBasicParsing
+    Expand-Archive -Path $Archive -DestinationPath $Temp
+    $Extracted = Get-ChildItem -Path $Temp -Directory | Select-Object -First 1
+    if (-not $Extracted -or -not (Test-Path (Join-Path $Extracted.FullName "typst.toml"))) {
+        throw "The downloaded archive does not contain typst.toml"
     }
+    New-Item -ItemType Directory -Path $Staging -Force | Out-Null
+    Copy-Item -Path (Join-Path $Extracted.FullName "*") -Destination $Staging -Recurse -Force
+
+    if (Test-Path $Target) { Move-Item $Target $Backup }
+    try {
+        Move-Item $Staging $Target
+    } catch {
+        if (Test-Path $Backup) { Move-Item $Backup $Target }
+        throw
+    }
+    if (Test-Path $Backup) { Remove-Item $Backup -Recurse -Force }
+    Write-Host "Installed @local/tuat-typst:$Version"
+} finally {
+    if (Test-Path $Staging) { Remove-Item $Staging -Recurse -Force }
+    if (Test-Path $Temp) { Remove-Item $Temp -Recurse -Force }
 }
-
-# Clone
-git clone --depth 1 https://github.com/ojii3/tuat-typst.git "$TEMP_DIR"
-if ($LastExitCode -ge 1) {
-    Write-Host "[Error] filed to clone" -ForegroundColor Red
-    exit 1
-}
-Write-Host "[info] clone succeeded"
-
-# Copy the files to the destination directory
-robocopy "$TEMP_DIR" "$FULL_PATH" /E /PURGE | Out-Null
-if ($LastExitCode -ge 8) {
-    Write-Host "[Error] filed to copy directory from $TEMP_DIR to $DATA_DIR" -ForegroundColor Red
-    exit 1
-}
-Write-Host "[info] copy succeeded"
-
-# Clean up
-Remove-Item "$TEMP_DIR" -Force -Recurse
-if (Test-Path $TEMP_DIR) {
-    Write-Host "[info] failed to clean up, but install finished successfully" -ForegroundColor Yellow
-}
-
-Write-Host "========================================"
-Write-Host "Installation completed successfully!" -ForegroundColor Green
-

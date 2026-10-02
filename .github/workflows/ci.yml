@@ -1,0 +1,39 @@
+# This workflow is managed by gh actions-lock.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  compile-template:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: typst-community/setup-typst@v5.3.0
+        with:
+          typst-version: 0.15.1
+      - name: Check release tag
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: bash
+        run: test "${GITHUB_REF_NAME}" = "v$(sed -n 's/^version = \"\(.*\)\"/\1/p' typst.toml)"
+      - name: Check installer shell syntax
+        if: runner.os == 'Linux'
+        run: shellcheck scripts/install.sh
+      - name: Install local package and create starter project
+        run: |
+          package="$RUNNER_TEMP/packages/local/tuat-typst/$(sed -n 's/^version = \"\(.*\)\"/\1/p' typst.toml)"
+          mkdir -p "$package"
+          cp -R . "$package/"
+          echo "TYPST_PACKAGE_PATH=$RUNNER_TEMP/packages" >> "$GITHUB_ENV"
+          typst init "@local/tuat-typst:$(sed -n 's/^version = \"\(.*\)\"/\1/p' typst.toml)" "$RUNNER_TEMP/report"
+          typst compile "$RUNNER_TEMP/report/main.typ" "$RUNNER_TEMP/report.pdf"
