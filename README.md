@@ -54,3 +54,5 @@ typst init @local/tuat-typst:0.2.0 my-report
 ```
 
 タイトルは `title`、再提出日は `resubmitDate`、再提出期限は `redeadline` で指定できます。本文が長い場合や、フォントによっては表紙が1ページに収まらないことがあります。
+
+Inspired by [pineapplehunter/tuat-tex](https://github.com/pineapplehunter/tuat-tex)
