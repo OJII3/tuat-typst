@@ -30,11 +30,11 @@ iwr https://raw.githubusercontent.com/OJII3/tuat-typst/main/scripts/install.ps1 
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
-      tuatTypst = tuat-typst.packages.${system}.default;
+      tuat-typst-package = tuat-typst.packages.${system}.default;
     in {
       devShells.${system}.default = pkgs.mkShell {
-        packages = [ pkgs.typst tuatTypst ];
-        TYPST_PACKAGE_PATH = "${tuatTypst}/share/typst/packages";
+        packages = [ pkgs.typst tuat-typst-package ];
+        TYPST_PACKAGE_PATH = "${tuat-typst-package}/share/typst/packages";
       };
     };
 }

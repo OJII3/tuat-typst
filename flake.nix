@@ -26,10 +26,10 @@
             src = ./.;
             installPhase = ''
               runHook preInstall
-              packageDir="$out/share/typst/packages/local/tuat-typst/0.2.0"
-              mkdir -p "$packageDir"
-              cp typst.toml lib.typ "$packageDir/"
-              cp -r template "$packageDir/"
+              package_dir="$out/share/typst/packages/local/tuat-typst/0.2.0"
+              mkdir -p "$package_dir"
+              cp typst.toml lib.typ "$package_dir/"
+              cp -r template "$package_dir/"
               runHook postInstall
             '';
           };
@@ -43,7 +43,7 @@
           typstFonts = [ pkgs.times-newer-roman ];
           haranoaji = pkgs.texlivePackages.haranoaji;
           haranoajiFontPath = "${haranoaji}/fonts/opentype/public/haranoaji";
-          tuatTypst = self.packages.${system}.default;
+          tuat-typst-package = self.packages.${system}.default;
         in
         {
           default = pkgs.mkShell {
@@ -52,11 +52,11 @@
               pkgs.tinymist
               haranoajiFontPath
               pkgs.times-newer-roman
-              tuatTypst
+              tuat-typst-package
             ];
             shellHook = ''
               export TYPST_FONT_PATHS="${pkgs.lib.makeSearchPath "share/fonts" typstFonts}:${haranoajiFontPath}"
-              export TYPST_PACKAGE_PATH="${tuatTypst}/share/typst/packages"
+              export TYPST_PACKAGE_PATH="${tuat-typst-package}/share/typst/packages"
             '';
           };
         }
