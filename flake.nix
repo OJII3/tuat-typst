@@ -26,7 +26,7 @@
           default = pkgs.mkShell {
             packages = [
               pkgs.typst
-              pkgs.typstyle
+              pkgs.tinymist
               haranoajiFontPath
               pkgs.times-newer-roman
             ];
