@@ -1,0 +1,28 @@
+# This workflow is managed by gh actions-lock.
+
+name: Release
+
+on:
+  workflow_call:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Build release package
+        id: package
+        run: |
+          version="$(sed -n 's/^version = \"\(.*\)\"/\1/p' typst.toml)"
+          test "$GITHUB_REF_NAME" = "v$version"
+          asset="tuat-typst-v$version.zip"
+          mkdir -p dist
+          zip -q -r "dist/$asset" typst.toml lib.typ LICENSE template
+          (cd dist && sha256sum "$asset" > SHA256SUMS)
+          echo "asset=$asset" >> "$GITHUB_OUTPUT"
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" "dist/${{ steps.package.outputs.asset }}" dist/SHA256SUMS --title "$GITHUB_REF_NAME" --generate-notes
