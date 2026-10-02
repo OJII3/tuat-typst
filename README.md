@@ -18,6 +18,28 @@ script=$(mktemp) && curl -fsSL https://raw.githubusercontent.com/OJII3/tuat-typs
 iwr https://raw.githubusercontent.com/OJII3/tuat-typst/main/scripts/install.ps1 | iex
 ```
 
+### Nix flake
+
+プロジェクトの `flake.nix` に入力と開発シェルを追加すると、パッケージを Nix store から利用できます。Typst 本体とこのパッケージはシェル内だけで有効になり、ユーザーの Typst package cache にはインストールされません。
+
+```nix
+{
+  inputs.tuat-typst.url = "github:OJII3/tuat-typst/v0.2.0";
+
+  outputs = { nixpkgs, tuat-typst, ... }:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
+      tuatTypst = tuat-typst.packages.${system}.default;
+    in {
+      devShells.${system}.default = pkgs.mkShell {
+        packages = [ pkgs.typst tuatTypst ];
+        TYPST_PACKAGE_PATH = "${tuatTypst}/share/typst/packages";
+      };
+    };
+}
+```
+
 インストール後は、Typstプロジェクトを作成して表紙のひな形を展開できます。
 
 ```sh
