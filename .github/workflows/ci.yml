@@ -58,6 +58,7 @@ jobs:
           $package = Join-Path $packageRoot "local/tuat-typst/$version"
           New-Item -ItemType Directory -Path $package -Force | Out-Null
           Copy-Item -Path @("typst.toml", "lib.typ", "LICENSE", "template") -Destination $package -Recurse
+          $env:TYPST_PACKAGE_PATH = $packageRoot
           "TYPST_PACKAGE_PATH=$packageRoot" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           typst init "@local/tuat-typst:$version" (Join-Path $env:RUNNER_TEMP "report")
           typst compile (Join-Path $env:RUNNER_TEMP "report/main.typ") (Join-Path $env:RUNNER_TEMP "report.pdf")
